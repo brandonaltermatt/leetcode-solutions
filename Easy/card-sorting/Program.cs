@@ -3,39 +3,52 @@ using System.Collections.Generic;
 
 namespace card_sorting
 {
+    public enum Suits {Diamond=0, Spade=1, Club=2, Heart=3};
     public class Card{
-        public static List<string> sortCardsFromStringList(List<string> cardStrings){
-            cardStrings = convertFaceCardsToNumbers(cardStrings);
-            return cardStrings;
-        }
+        int rank;
+        Suits suit;
+        
+        public Card(string cardString){
+            int length = cardString.Length;
+            string rank = cardString.Substring(0, length-1);
+            char suit = cardString[length-1];
 
-        public static List<string> convertFaceCardsToNumbers(List<string> cardStrings){
-            for(int i=0; i<cardStrings.Count; i++){
-                char rank = cardStrings[i][0];
-                char suit = cardStrings[i][1];
+            switch(rank){
+                case "J":
+                    this.rank = 11;
+                    break;
+                case "Q":
+                    this.rank = 12;
+                    break;
+                case "K":
+                    this.rank = 13;
+                    break;
+                case "A":
+                    this.rank = 14;
+                    break;
+                default:
+                    this.rank = int.Parse(rank);
+                    break;
+            }
 
-                if(char.IsDigit(rank))
-                    continue;
-
-                switch(rank){
-                    case 'J':
-                        cardStrings[i] = "11" + suit;
+                switch(suit){
+                    case 'd':
+                        this.suit = Suits.Diamond;
                         break;
-                    case 'Q':
-                        cardStrings[i] = "12" + suit;
+                    case 's':
+                        this.suit = Suits.Spade;
                         break;
-                    case 'K':
-                        cardStrings[i] = "13" + suit;
+                    case 'c':
+                        this.suit = Suits.Club;
                         break;
-                    case 'A':
-                        cardStrings[i] = "14" + suit;
-                        break;
+                    case 'h':
+                        this.suit = Suits.Heart;
+                        break;                    
                     default:
                         break;
                 }
-            }
-            return cardStrings;
         }
+
     }
     class Program
     {
@@ -43,9 +56,14 @@ namespace card_sorting
         {
             List<string> cards = new List<string> {"3c", "Js", "2d", "10h", "Kh", "8s", "Ac", "4h"};
             Console.WriteLine(string.Join(",", cards));
-            cards = Card.sortCardsFromStringList(cards);
-            Console.WriteLine(string.Join(",", cards));
 
+            List<Card> cardList = new List<Card>();
+            foreach(string card in cards){
+                var Card = new Card(card);
+                cardList.Add(Card);
+            }
+
+            //Console.WriteLine(string.Join(",", cards));
         }
     }
 }
