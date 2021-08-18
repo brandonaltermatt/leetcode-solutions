@@ -1,28 +1,49 @@
 /**
  * https://leetcode.com/problems/count-largest-group/
+ * Given an integer n, find the sum of the digits for every number from 1 to n.
+ * Count the frequency of each sum. Return the sum with the greatest frequency.
+**/
+
+/**
  * @param {number} n
  * @return {number}
  */
  var countLargestGroup = function(n) {
-    let biggest_sum = 0;
-    let sum_of_digits = 0;
+    var digit_sum_groups = [0];
+    let biggest_group_count = 0;
+    let max_sum = 0;
 
-    for(let i=0; i<n; i++){
-        let number_string = i.toString();
-        
-        for (let j=0; j < number_string.length; j++){
-            sum_of_digits += parseInt(number_string[j])
-            console.log(`${i}\t${parseInt(number_string[j])}`)
-        }
-        
-        if (sum_of_digits > biggest_sum){
-            biggest_sum = sum_of_digits;
-        }
+    for(let i=1; i<=n; i++){
+        number_array_sum = sumOfNumberDigits(i);
 
-        sum_of_digits = 0;
+        if(!digit_sum_groups[number_array_sum]){
+            digit_sum_groups[number_array_sum] = 0;
+        }
+        digit_sum_groups[number_array_sum]++;
     }
 
-    return biggest_sum;
+    max_sum = Math.max.apply(null, digit_sum_groups);
+
+    biggest_group_count = digit_sum_groups.reduce(function(accumulator, currentValue) {
+        return accumulator + (currentValue === max_sum);
+    }, 0);
+    
+    return biggest_group_count;
 };
 
-countLargestGroup(13)
+/**
+ * @param {number} num
+ * @return {number}
+ */
+var sumOfNumberDigits = function (num){
+    let number_string = num.toString();
+    let char_array = number_string.split('');
+    let number_array = char_array.map(Number);
+    let number_array_sum = number_array.reduce(function (a,b) {
+        return a+b;
+    }, 0);
+
+    return number_array_sum;
+};
+
+console.log(countLargestGroup(11));
