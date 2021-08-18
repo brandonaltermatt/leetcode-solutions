@@ -1,4 +1,5 @@
 /**
+ * https://leetcode.com/problems/count-largest-group/
  * @param {number} n
  * @return {number}
  */
