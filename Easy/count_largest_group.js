@@ -10,8 +10,8 @@
  */
  var countLargestGroup = function(n) {
     var digit_sum_frequencies = [0];
-    let greatest_sum_frequency = 0;
     let greatest_sum = 0;
+    let greatest_sum_frequency = 0;
 
     for(let i=1; i<=n; i++){
         sum_of_digits = sumOfNumberDigits(i);
