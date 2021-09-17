@@ -11,8 +11,8 @@
     let current_sum = 0;
 
     for(let i=0; i<nums.length;i++){
-        current_num = nums[i];
-        current_sum = Math.max(current_sum + current_num, current_num);
+        current_value = nums[i];
+        current_sum = Math.max(current_sum + current_value, current_value);
         max_sum = Math.max(max_sum, current_sum);
     }
 
