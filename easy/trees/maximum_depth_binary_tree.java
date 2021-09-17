@@ -3,6 +3,8 @@ https://leetcode.com/explore/interview/card/top-interview-questions-easy/94/tree
 Given an integer n, find the sum of the digits for every number from 1 to n.
 Count the frequency of each sum. Return a count of the sums with the greatest frequency.
 */
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 // Definition for a binary tree node.
@@ -19,6 +21,40 @@ public class TreeNode {
     }
 }
 
+// Iterative breadth-first search solution
+// Iterate through every node on a level, then increase the count by 1
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root == null) return 0;
+
+        Queue<TreeNode> node_queue = new LinkedList<>();
+        int height;
+
+        node_queue.offer(root);
+        height = 0;
+
+        while(!node_queue.isEmpty()){
+            int size = node_queue.size();
+            while(size-- > 0){
+                TreeNode current_node = node_queue.poll();
+                if(current_node.left  != null){
+                    node_queue.offer(current_node.left);
+                }
+                if(current_node.right != null){
+                    node_queue.offer(current_node.right);
+                }
+            }
+            height++;
+        }
+
+        return height;
+    }
+}
+
+/*
+// Iterative post-order depth-first search solution
+// This essentially simulates the program stack of the resursive solution,
+// however we implement our own version of the stack using a data structure.
 class Solution {
     public int maxDepth(TreeNode root) {
         if(root == null) return 0;
@@ -49,8 +85,9 @@ class Solution {
         return max_value;
     }
 }
+*/
 
-/* Recursive post-order solution
+/* Recursive post-order depth-first search solution
 class Solution {
     public int maxDepth(TreeNode root) {
         if (root == null) return 0;
