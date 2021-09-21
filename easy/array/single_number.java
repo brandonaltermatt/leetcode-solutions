@@ -1,10 +1,10 @@
-import java.util.Arrays;
-
 /*
 https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/549/
 Given a non-empty array of integers nums, every element appears twice except for one.
 Find that single one.
 */
+
+import java.util.Arrays;
 
 class Solution{
     public int singleNumber(int[] nums){

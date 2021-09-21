@@ -1,12 +1,16 @@
+/*
+https://leetcode.com/problems/non-decreasing-array/
+Given an array nums with n integers, your task is to check 
+if it could become non-decreasing by modifying at most one element.
+We define an array is non-decreasing if nums[i] <= nums[i + 1] holds 
+for every i (0-based) such that (0 <= i <= n - 2).
+*/
+
 using namespace std;
 #include <vector>
 
 class Solution {
 public:
-    /*  Check if each number is lower to or equal to the previous number.
-        If the number before the previous number is smaller than the current number,
-        make the current number equal to the previous number.
-        Otherwise, make the previous number equal to the current number. */
     bool checkPossibility(vector<int>& nums) {
         int check=0;
 

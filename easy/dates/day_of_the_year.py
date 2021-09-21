@@ -1,12 +1,18 @@
-import datetime
 """
-Calculate the number of days elapsed in the given year.
+https://leetcode.com/problems/day-of-the-year/
+Given a string date representing a Gregorian calendar date
+formatted as YYYY-MM-DD, return the day number of the year.
+"""
 
-Store the month, day, and year. Creat an array for the days in the months.
+"""
+Store the month, day, and year. Create an array for the days in the months.
 If the year is a leap year, add another day to feburary.
 For each month except the current month, add the number of days
 for that month to the day value.
 """
+
+import datetime
+
 class Solution:
     def dayOfYear(self, date: str) -> int:
         year = int(date[0:4])
