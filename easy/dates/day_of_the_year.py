@@ -4,15 +4,14 @@ Given a string date representing a Gregorian calendar date
 formatted as YYYY-MM-DD, return the day number of the year.
 """
 
+import datetime
+
 """
 Store the month, day, and year. Create an array for the days in the months.
 If the year is a leap year, add another day to feburary.
 For each month except the current month, add the number of days
 for that month to the day value.
 """
-
-import datetime
-
 class Solution:
     def dayOfYear(self, date: str) -> int:
         year = int(date[0:4])
@@ -28,7 +27,7 @@ class Solution:
 
         return day
 
-"""
+""" Solution using datetime functions
 class Solution:
     def dayOfYear(self, date: str) -> int:
         Y, M, D = map(int, date.split('-'))
