@@ -7,34 +7,32 @@
 /**
  * @param {number[]} nums
  */
- var Solution = function(nums) {
-    this.original_array = nums;
+const Solution = (nums) => {
+  this.original_array = nums;
 };
 
 /**
  * Resets the array to its original configuration and return it.
  * @return {number[]}
  */
-Solution.prototype.reset = function() {
-    return this.original_array;
-};
+Solution.prototype.reset = () => this.original_array;
 
 /**
  * Returns a random shuffling of the array.
  * @return {number[]}
  */
-Solution.prototype.shuffle = function() {
-    const array_to_shuffle = [...this.original_array];
-    const array_length = array_to_shuffle.length;
+Solution.prototype.shuffle = () => {
+  const shuffledArray = [...this.original_array];
+  const arrayLength = shuffledArray.length;
 
-    for(let i=0; i < array_length; i++){
-        const random_index = Math.floor(Math.random() * array_length);
-        [array_to_shuffle[i], array_to_shuffle[random_index]] = [array_to_shuffle[random_index], array_to_shuffle[i]];
-    }
-    return array_to_shuffle;
+  for (let i = 0; i < arrayLength; i += 1) {
+    const randomIndex = Math.floor(Math.random() * arrayLength);
+    [shuffledArray[i], shuffledArray[randomIndex]] = [shuffledArray[randomIndex], shuffledArray[i]];
+  }
+  return shuffledArray;
 };
 
-/** 
+/**
  * Your Solution object will be instantiated and called as such:
  * var obj = new Solution(nums)
  * var param_1 = obj.reset()

@@ -1,11 +1,10 @@
-/**
- * https://leetcode.com/problems/two-sum/
- * Given an array of integers nums and an integer target, 
- * return indices of the two numbers such that they add up to target.
- * You may assume that each input would have exactly one solution, 
- * and you may not use the same element twice.
- * You can return the answer in any order.
- */
+/* https://leetcode.com/problems/two-sum/
+Given an array of integers nums and an integer target,
+return indices of the two numbers such that they add up to target.
+You may assume that each input would have exactly one solution,
+and you may not use the same element twice.
+You can return the answer in any order.
+*/
 
 /**
  * @param {number[]} nums
@@ -13,19 +12,20 @@
  * @return {number[]}
  */
 
-var twoSum = function(nums, target) {
+const twoSum = (nums, target) => {
   const map = {};
 
   for (let i = 0; i < nums.length; i += 1) {
-    let currentValue = nums[i];
-    let complementPair = target - currentValue;
+    const currentValue = nums[i];
+    const complementPair = target - currentValue;
 
     if (map[complementPair] !== undefined) {
-        return [map[complementPair], i];
-    } else {
-      map[currentValue] = i;
+      return [map[complementPair], i];
     }
+    map[currentValue] = i;
   }
+
+  return false;
 };
 
 /* Solution that iterates twice with indexOf

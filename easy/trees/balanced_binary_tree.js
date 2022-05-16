@@ -15,12 +15,12 @@ a binary tree in which the left and right subtrees of every node differ in heigh
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isBalanced = function(root) {
+const isBalanced = (root) => {
   let result = true;
 
-  const depthFirstSearch = function(node) {
+  const depthFirstSearch = (node) => {
     if (node === null) return 0;
-  
+
     const left = depthFirstSearch(node.left);
     const right = depthFirstSearch(node.right);
 
@@ -39,9 +39,9 @@ var isBalanced = function(root) {
       if (node === null) return 0;
       return Math.max(getHeight(node.left), getHeight(node.right)) + 1;
   }
-  
+
   if (root === null) return true;
-  return Math.abs( getHeight(root.left) - getHeight(root.right) ) < 2 && 
+  return Math.abs( getHeight(root.left) - getHeight(root.right) ) < 2 &&
     isBalanced(root.left) && isBalanced(root.right);
 };
 */
