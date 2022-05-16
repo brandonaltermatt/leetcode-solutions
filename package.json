@@ -1,0 +1,19 @@
+{
+  "name": "leetcode-solutions",
+  "version": "1.0.0",
+  "description": "A collection of solutions for leetcode programming challenges.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandonaltermatt/leetcode-solutions.git"
+  },
+  "author": "Brandon Altermatt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brandonaltermatt/leetcode-solutions/issues"
+  },
+  "homepage": "https://github.com/brandonaltermatt/leetcode-solutions#readme"
+}
