@@ -14,5 +14,6 @@ module.exports = {
     'linebreak-style': ['error', process.platform === 'win32' ? 'windows' : 'unix'],
     'no-console': 'off',
     'no-unused-vars': 'off',
+    'no-param-reassign': 'off',
   },
 };
