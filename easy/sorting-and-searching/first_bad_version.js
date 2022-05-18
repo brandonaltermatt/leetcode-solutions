@@ -1,42 +1,39 @@
+/* eslint-disable implicit-arrow-linebreak */
 /** https://leetcode.com/explore/interview/card/top-interview-questions-easy/96/sorting-and-searching/774/
- * Suppose you have n versions [1, 2, ..., n] and you want to find out the first bad one, 
+ * Suppose you have n versions [1, 2, ..., n] and you want to find out the first bad one,
  * which causes all the following ones to be bad.
- * You are given an API bool isBadVersion(version) which returns whether version is bad. 
- * Implement a function to find the first bad version. 
+ * You are given an API bool isBadVersion(version) which returns whether version is bad.
+ * Implement a function to find the first bad version.
  */
 
 /**
  * Definition for isBadVersion()
- * 
  * @param {integer} version number
  * @return {boolean} whether the version is bad
  * isBadVersion = function(version) {
  *     ...
  * };
  */
-
 /**
  * @param {function} isBadVersion()
  * @return {function}
  */
- var solution = function(isBadVersion) {
-    /**
+const solution = (isBadVersion) =>
+  /**
      * @param {integer} n Total versions
      * @return {integer} The first bad version
      */
-    return function(n) {
-        let start = 0;
+  function (n) {
+    let left = 1;
 
-        while(start <= n){
-            let mid = Math.floor((start+n)/2);
-            let version_status = isBadVersion(mid);
+    while (left <= n) {
+      const middle = Math.floor((left + n) / 2);
 
-            if(version_status == false){
-                start = mid+1;
-            } else {
-                if(start == n) return mid;
-                n = mid;
-            }
-        }
-    };
-};
+      if (isBadVersion(middle)) {
+        if (left === n) return middle;
+        n = middle;
+      } else {
+        left = middle + 1;
+      }
+    }
+  };
