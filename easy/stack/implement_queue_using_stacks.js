@@ -19,6 +19,7 @@ Notes:
 const MyQueue = () => {
   this.stack = [];
   this.reversed = [];
+  this.front = null;
 };
 
 /**
@@ -26,6 +27,7 @@ const MyQueue = () => {
  * @return {void}
  */
 MyQueue.prototype.push = (x) => {
+  if (!this.stack.length) this.front = x;
   this.stack.push(x);
 };
 
@@ -45,7 +47,7 @@ MyQueue.prototype.pop = () => {
 /**
  * @return {number}
  */
-MyQueue.prototype.peek = () => this.reversed[this.reversed.length - 1] ?? this.stack[0];
+MyQueue.prototype.peek = () => this.reversed[this.reversed.length - 1] ?? this.front;
 
 /**
  * @return {boolean}
