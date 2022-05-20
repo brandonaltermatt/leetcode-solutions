@@ -17,5 +17,6 @@ module.exports = {
     'no-param-reassign': 'off',
     'func-names': 'off',
     'consistent-return': 'off',
+    'no-plusplus': 'off',
   },
 };
