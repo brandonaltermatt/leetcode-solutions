@@ -18,5 +18,6 @@ module.exports = {
     'func-names': 'off',
     'consistent-return': 'off',
     'no-plusplus': 'off',
+    'no-continue': 'off',
   },
 };
