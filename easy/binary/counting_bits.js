@@ -9,7 +9,7 @@ in the binary representation of i.
  * @return {number[]}
  */
 const countBits = function (n) {
-  const counts = Array(n + 1).fill(0);
+  const counts = new Uint8Array(n + 1);
 
   for (let i = 1; i < n + 1; i++) {
     counts[i] = counts[i >>> 1] + (i & 1);
