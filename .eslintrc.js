@@ -19,5 +19,6 @@ module.exports = {
     'consistent-return': 'off',
     'no-plusplus': 'off',
     'no-continue': 'off',
+    'no-unused-expressions': 'off',
   },
 };
