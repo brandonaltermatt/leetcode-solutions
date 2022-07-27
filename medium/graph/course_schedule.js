@@ -23,7 +23,7 @@ Use a modified Kann's algorithm to detect cycles in a directed acyclic graph.
       Else, return false, as this indicates there is a cycle in the graph,
       as we have visited a node more than once, or there were no nodes with zero indegree.
 */
-const canFinish = function (numCourses, prerequisites) {
+const canFinishBfs = function (numCourses, prerequisites) {
   const adjacencyList = new Map();
   const inDegree = Array(numCourses).fill(0);
   const stack = [];
@@ -32,7 +32,7 @@ const canFinish = function (numCourses, prerequisites) {
   prerequisites.forEach((preReq) => {
     const course = preReq[0];
     const preCursor = preReq[1];
-    // Create a list of outgoing edges for each preCursor
+    // Create an adjacency list for O(1) access to all course prereqs
     if (adjacencyList.has(preCursor)) {
       adjacencyList.get(preCursor).push(course);
     } else {
@@ -47,6 +47,8 @@ const canFinish = function (numCourses, prerequisites) {
     if (inDegree[i] === 0) stack.push(i);
   }
 
+  // Simulate removing node from the graph by decrementing the incoming edge count of its neighbors
+  // Add neighbors to stack if indegree becomes zero
   while (stack.length) {
     const course = stack.pop();
     if (adjacencyList.has(course)) {
@@ -54,8 +56,48 @@ const canFinish = function (numCourses, prerequisites) {
         if (--inDegree[preCursor] === 0) stack.push(preCursor);
       });
     }
+    // Keep a count of visited nodes
     visited++;
   }
 
   return visited === numCourses;
+};
+
+// Solution using depth first search and memoization to cache previously calculated results
+const canFinishDfs = function (numCourses, prerequisites) {
+  const adjacencyList = Array.from({ length: numCourses }, (e) => []);
+  const vertexState = new Array(numCourses).fill(0);
+
+  // Create an adjacency list for O(1) access to all course prereqs
+  prerequisites.forEach((preReq) => {
+    const course = preReq[0];
+    const dependency = preReq[1];
+    adjacencyList[dependency].push(course);
+  });
+
+  const hasCycle = (course) => {
+    // Status of 1 indicates course has been processed already, so we can skip it
+    if (vertexState[course] === 1) return false;
+    // Status of -1 indicates course is being processed, i.e. we have cycled back to it
+    if (vertexState[course] === -1) return true;
+
+    vertexState[course] = -1;
+
+    // Iterate through the vertex's neighbors
+    if (adjacencyList[course].some((preReq) => {
+      if (hasCycle(preReq)) return true;
+      return false;
+    })) return true;
+
+    // Mark the course as finished
+    vertexState[course] = 1;
+    return false;
+  };
+
+  // Iterate through all courses to check for loops
+  for (let i = 0; i < numCourses; i++) {
+    if (hasCycle(i)) return false;
+  }
+
+  return true;
 };
