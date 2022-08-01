@@ -11,6 +11,21 @@ You may assume that you have an infinite number of each kind of coin.
  * @param {number} amount
  * @return {number}
  */
+const coinChangeTabulation = function (coins, amount) {
+  const tab = new Array(amount + 1).fill(Infinity);
+  tab[0] = 0;
+
+  for (let i = 1; i < tab.length; i++) {
+    for (let j = 0; j < coins.length; j++) {
+      if (coins[j] <= i) {
+        tab[i] = Math.min(tab[i - coins[j]] + 1, tab[i]);
+      }
+    }
+  }
+
+  return tab[amount] === Infinity ? -1 : tab[amount];
+};
+
 // Recursion using memoization to cache overlapping subproblems
 const coinChangeMemoization = function (coins, amount) {
   const minChange = (denominations, remainder, memo) => {
