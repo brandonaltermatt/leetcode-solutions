@@ -9,6 +9,25 @@ You must write an algorithm that runs in O(n) time and without using the divisio
  * @param {number[]} nums
  * @return {number[]}
  */
+// Solution using 2 loops, O(2N) == O(N)
+const productExceptSelfTwoLoops = function (nums) {
+  const result = [];
+
+  let prefix = 1;
+  for (let i = 0; i < nums.length; i++) {
+    result[i] = prefix;
+    prefix *= nums[i];
+  }
+
+  let suffix = 1;
+  for (let i = nums.length - 1; i >= 0; i--) {
+    result[i] *= suffix;
+    suffix *= nums[i];
+  }
+
+  return result;
+};
+
 // Solution using 3 loops, O(3N) == O(N)
 const productExceptSelfThreeLoops = function (nums) {
   const prefixes = new Array(nums.length);
