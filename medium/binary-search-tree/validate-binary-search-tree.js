@@ -19,16 +19,20 @@ A valid BST is defined as follows:
  * @return {boolean}
  */
 // Iterate the tree using inorder traversal, return false if previous value is greater than current
+// This works because inorder traversal of a BST always returns nodes in non-decreasing order
 const isValidBST = function (root) {
   const stack = [];
+  // The previously evaluated node should always have a smaller value than the current node
   let previous = null;
 
   while (root || stack.length) {
+    // Traverse to the end of the leftmost branch of root
     while (root) {
       stack.push(root);
       root = root.left;
     }
     root = stack.pop();
+    // Return false if the previous value is greater than the current value
     if ((previous !== null) && (root.val <= previous)) return false;
     previous = root.val;
     root = root.right;
@@ -37,15 +41,18 @@ const isValidBST = function (root) {
   return true;
 };
 
-// Recurse through the tree using depth first search to compare nodes' values to their children
+// Recurse through the tree using depth first search, keeping track of min and max values for nodes
 const isValidBSTDfs = function (root) {
   const helper = (node, min, max) => {
     if (!node) return true;
 
+    // Return false if this node's value is out of the bounds of the min or max it should be
     if ((node.val >= max) || (node.val <= min)) return false;
 
+    // Check the left child's value is less than this node, and the right child's value is greater
     return helper(node.left, min, node.val) && helper(node.right, node.val, max);
   };
 
+  // Initialize min and max values with lowest possible and highest possible values
   return helper(root, -Infinity, Infinity);
 };
