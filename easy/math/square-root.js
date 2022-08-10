@@ -10,6 +10,16 @@ such as pow(x, 0.5) or x ** 0.5.
  * @param {number} x
  * @return {number}
  */
+const mySqrtNewtons = function (x) {
+  let r = x;
+
+  while ((r * r) > x) {
+    r = (((r + x) / r) / 2) | 0;
+  }
+
+  return r;
+};
+
 const mySqrtBinarySearch = function (x) {
   if (x < 2) return x;
 
@@ -29,16 +39,6 @@ const mySqrtBinarySearch = function (x) {
   }
 
   return left;
-};
-
-const mySqrtNewtons = function (x) {
-  let r = x;
-
-  while ((r * r) > x) {
-    r = (((r + x) / r) / 2) | 0;
-  }
-
-  return r;
 };
 
 const mySqrtSubtraction = function (x) {
