@@ -10,9 +10,17 @@ such as pow(x, 0.5) or x ** 0.5.
  * @param {number} x
  * @return {number}
  */
-const mySqrt = function (x) {
-  if (x === 0) return 0;
+const mySqrtNewtons = function (x) {
+  let r = x;
 
+  while ((r * r) > x) {
+    r = (((r + x) / r) / 2) | 0;
+  }
+
+  return r;
+};
+
+const mySqrtSubtraction = function (x) {
   let i = 0;
 
   while (x > 0) {
