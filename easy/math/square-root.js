@@ -41,6 +41,21 @@ const mySqrtBinarySearch = function (x) {
   return left;
 };
 
+const mySqrtBitwise = function (x) {
+  let ans = 0;
+  let bit = 1 << 16;
+
+  while (bit > 0) {
+    ans |= bit;
+    if (ans * ans > x) {
+      ans ^= bit;
+    }
+    bit >>= 1;
+  }
+
+  return ans;
+};
+
 const mySqrtSubtraction = function (x) {
   let i = 0;
 
