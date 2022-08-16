@@ -21,5 +21,6 @@ module.exports = {
     'no-continue': 'off',
     'no-unused-expressions': 'off',
     'no-bitwise': 'off',
+    'no-loop-func': 'off',
   },
 };
