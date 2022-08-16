@@ -12,6 +12,41 @@ If this is impossible, return -1.
  * @param {number[][]} grid
  * @return {number}
  */
+const orangesRottingDfs = function (grid) {
+  const maxCol = grid[0].length;
+  const maxRow = grid.length;
+
+  const rotAdjacent = (row, col, minute) => {
+    if (col < 0 || col > maxCol - 1
+      || row < 0 || row > maxRow - 1
+      || grid[row][col] === 0
+      || ((grid[row][col] > 1) && (grid[row][col] < minute))) return;
+
+    grid[row][col] = minute;
+    rotAdjacent(row + 1, col, minute + 1);
+    rotAdjacent(row, col + 1, minute + 1);
+    rotAdjacent(row - 1, col, minute + 1);
+    rotAdjacent(row, col - 1, minute + 1);
+  };
+
+  for (let row = 0; row < maxRow; row++) {
+    for (let col = 0; col < maxCol; col++) {
+      if (grid[row][col] === 2) rotAdjacent(row, col, 2);
+    }
+  }
+
+  let minutes = 2;
+  for (let row = 0; row < maxRow; row++) {
+    for (let col = 0; col < maxCol; col++) {
+      const cell = grid[row][col];
+      if (cell === 1) return -1;
+      minutes = Math.max(minutes, cell);
+    }
+  }
+
+  return minutes;
+};
+
 const orangesRottingBfs = function (grid) {
   const maxCol = grid[0].length;
   const maxRow = grid.length;
