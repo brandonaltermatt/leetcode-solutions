@@ -10,32 +10,32 @@ horizontally or vertically. You may assume all four edges of the grid are all su
  * @return {number}
  */
 const numIslands = function (grid) {
-  const maxRow = grid[0].length;
-  const maxCol = grid.length;
+  const maxRow = grid.length;
+  const maxCol = grid[0].length;
   let result = 0;
 
-  const floodFill = (col, row) => {
-    if (col < 0
-      || row < 0
-      || col > maxCol - 1
+  const floodFill = (row, col) => {
+    if (row < 0
+      || col < 0
       || row > maxRow - 1
-      || grid[col][row] !== '1'
+      || col > maxCol - 1
+      || grid[row][col] !== '1'
     ) return;
 
-    grid[col][row] = '0';
+    grid[row][col] = '0';
 
-    floodFill(col + 1, row);
-    floodFill(col, row + 1);
-    floodFill(col - 1, row);
-    floodFill(col, row - 1);
+    floodFill(row + 1, col);
+    floodFill(row, col + 1);
+    floodFill(row - 1, col);
+    floodFill(row, col - 1);
 
     return 1;
   };
 
-  for (let col = 0; col < maxCol; col++) {
-    for (let row = 0; row < maxRow; row++) {
-      if (grid[col][row] === '1') {
-        result += floodFill(col, row);
+  for (let row = 0; row < maxRow; row++) {
+    for (let col = 0; col < maxCol; col++) {
+      if (grid[row][col] === '1') {
+        result += floodFill(row, col);
       }
     }
   }
