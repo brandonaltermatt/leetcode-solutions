@@ -8,6 +8,29 @@ that cover all the intervals in the input.
  * @param {number[][]} intervals
  * @return {number[][]}
  */
+const mergeInNewArray = function (intervals) {
+  if (intervals.length < 2) return intervals;
+
+  intervals.sort((a, b) => a[0] - b[0]);
+
+  const result = [];
+
+  let [start, end] = intervals[0];
+  for (let i = 0; i < intervals.length; i++) {
+    const current = intervals[i];
+
+    if (end >= current[0]) {
+      end = Math.max(end, current[1]);
+    } else {
+      result.push([start, end]);
+      [start, end] = current;
+    }
+  }
+  result.push([start, end]);
+
+  return result;
+};
+
 const mergeInPlace = function (intervals) {
   if (intervals.length < 2) return intervals;
 
