@@ -10,7 +10,6 @@ that cover all the intervals in the input.
  */
 const mergeInNewArray = function (intervals) {
   if (intervals.length < 2) return intervals;
-
   intervals.sort((a, b) => a[0] - b[0]);
 
   const result = [];
@@ -33,7 +32,6 @@ const mergeInNewArray = function (intervals) {
 
 const mergeInPlace = function (intervals) {
   if (intervals.length < 2) return intervals;
-
   intervals.sort((a, b) => a[0] - b[0]);
 
   let i = 1;
