@@ -9,6 +9,27 @@ You must solve this problem without using the library's sort function.
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
+const sortColorsOnePass = function (nums) {
+  if (nums.length < 2) return nums;
+
+  let left = 0;
+  let middle = 0;
+  let right = nums.length - 1;
+
+  while (middle <= right) {
+    if (nums[middle] === 0) {
+      [nums[left], nums[middle]] = [nums[middle], nums[left]];
+      middle++;
+      left++;
+    } else if (nums[middle] === 2) {
+      [nums[middle], nums[right]] = [nums[right], nums[middle]];
+      right--;
+    } else {
+      middle++;
+    }
+  }
+};
+
 const sortColors2Pass = function (nums) {
   if (nums.length < 2) return nums;
 
