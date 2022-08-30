@@ -3,25 +3,28 @@ Given a string s and a dictionary of strings wordDict, return true if s can be s
 into a space-separated sequence of one or more dictionary words.
 Note that the same word in the dictionary may be reused multiple times in the segmentation.
 */
+
 /**
  * @param {string} s
  * @param {string[]} wordDict
  * @return {boolean}
  */
-const wordBreakDfsMemoization = function (s, wordDict) {
+const wordBreak = function (s, wordDict) {
   const wordSet = new Set(wordDict);
+  const memo = new Array(s.length + 1).fill(false);
+  memo[0] = true;
 
-  const dp = (start) => {
-    if (start === s.length) return true;
+  for (let end = 1; end <= s.length; end++) {
+    for (let start = 0; start < end; start++) {
+      if (memo[start] === false) continue;
 
-    for (let i = (start + 1); i < (s.length + 1); i++) {
-      const end = i;
       const word = s.slice(start, end);
-      if (wordSet.has(word) && dp(end)) return true;
+      if (!wordSet.has(word)) continue;
+
+      memo[end] = true;
+      break;
     }
+  }
 
-    return false;
-  };
-
-  return dp(0);
+  return memo[s.length];
 };
