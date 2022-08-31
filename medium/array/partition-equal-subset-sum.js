@@ -26,3 +26,21 @@ const canPartitionHashSet = function (nums) {
 
   return memo.has(target);
 };
+
+// Depth first search of combination tree, branching when index is added to sum, and when it is not
+const canPartitionBacktracking = function (nums) {
+  nums.sort((a, b) => b - a);
+  const totalSum = nums.reduce((acc, curr) => acc + curr);
+  if (totalSum % 2) return false;
+
+  const target = totalSum / 2;
+
+  const backtracking = (currSum, index) => {
+    if ((currSum > target) || (index >= nums.length)) return false;
+    if (currSum === target) return true;
+
+    return backtracking(currSum + nums[index], index + 1) || backtracking(currSum, index + 1);
+  };
+
+  return backtracking(0, 0);
+};
