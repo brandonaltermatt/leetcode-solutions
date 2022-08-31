@@ -6,25 +6,35 @@ Note that the same word in the dictionary may be reused multiple times in the se
 
 /**
  * @param {string} s
- * @param {string[]} wordDict
+ * @param {string[]} words
  * @return {boolean}
  */
-const wordBreak = function (s, wordDict) {
-  const wordSet = new Set(wordDict);
-  const memo = new Array(s.length + 1).fill(false);
-  memo[0] = true;
+const wordBreak = function (s, words) {
+  // Use a set for O(1) lookups for words
+  const wordSet = new Set(words);
+  // Use an array representing indexes of the string to mark whether a word
+  // from the word set can start at an index of the string
+  const canWordStartAtIndex = new Array(s.length + 1).fill(false);
+  // Assume the first character of the string is the beginning of a word from the word set
+  canWordStartAtIndex[0] = true;
 
+  // Go through the string, testing every index to see if a word can end at that index.
+  // If a word can end at that index, mark it as true, and use that index as a starting point
+  // for future iterations, to check if another word can be concatenated from that index.
   for (let end = 1; end <= s.length; end++) {
     for (let start = 0; start < end; start++) {
-      if (memo[start] === false) continue;
+      // Skip iteration if the index isn't a valid start of a word
+      if (canWordStartAtIndex[start] === false) continue;
 
+      // Skip iteration if word set does not contain the word sliced from the string
       const word = s.slice(start, end);
       if (!wordSet.has(word)) continue;
 
-      memo[end] = true;
+      // Mark that a word from the word set was found, and ends at this index
+      canWordStartAtIndex[end] = true;
       break;
     }
   }
 
-  return memo[s.length];
+  return canWordStartAtIndex[s.length];
 };
