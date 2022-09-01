@@ -59,3 +59,18 @@ const myAtoi = function (s) {
   if (result > 2147483647) return 2147483647;
   return result;
 };
+
+const myAtoiRegex = function (str) {
+  let result = str.trim().match(/^[-+]?[0-9]+|^[0-9]+/ig);
+
+  if (result != null) {
+    result = result.join('');
+
+    if (result > 2147483647) return 2147483647;
+    if (result < -2147483648) return -2147483648;
+
+    return result;
+  }
+
+  return 0;
+};
