@@ -7,7 +7,7 @@ The solution set must not contain duplicate subsets. Return the solution in any 
  * @param {number[]} nums
  * @return {number[][]}
  */
-const subsets = function (nums) {
+const subsetsIterative = function (nums) {
   const result = [[]];
 
   for (let i = 0; i < nums.length; i++) {
@@ -17,6 +17,22 @@ const subsets = function (nums) {
       result.push(result[j].concat(nums[i]));
     }
   }
+
+  return result;
+};
+
+const subsetsDfs = function (nums) {
+  const result = [];
+
+  const dfs = (subset, index) => {
+    result.push(subset);
+    for (let i = index; i < nums.length; i++) {
+      const newSubset = subset.concat(nums[i]);
+      dfs(newSubset, i + 1);
+    }
+  };
+
+  dfs([], 0);
 
   return result;
 };
