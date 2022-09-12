@@ -36,3 +36,18 @@ const subsetsDfs = function (nums) {
 
   return result;
 };
+
+const subsetsBitManipulation = function (nums) {
+  const result = [];
+  const powerSetLength = 1 << nums.length;
+
+  for (let i = 0; i < powerSetLength; i++) {
+    const newSubset = [];
+    for (let j = 0; j < nums.length; j++) {
+      if (i & (1 << j)) newSubset.push(nums[j]);
+    }
+    result.push(newSubset);
+  }
+
+  return result;
+};
