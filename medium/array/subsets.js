@@ -51,3 +51,5 @@ const subsetsBitManipulation = function (nums) {
 
   return result;
 };
+
+const subsetsOneLine = (nums) => nums.reduce((s, l) => s.concat(s.map((t) => t.concat(l))), [[]]);
