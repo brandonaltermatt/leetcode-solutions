@@ -10,6 +10,26 @@ Note: There are many solutions for this problem. See here:
  * @param {number[]} nums
  * @return {boolean}
  */
+// Checks every combination of sums to find if one equals half the sum of nums, O(2^n)
+const canPartitionHashSet = function (nums) {
+  const totalSum = nums.reduce((acc, curr) => acc + curr);
+  if ((totalSum % 2) !== 0) return false;
+
+  const target = totalSum / 2;
+
+  const memo = new Set([0]);
+
+  for (let i = 0; i < nums.length; i++) {
+    const possibleSums = Array.from(memo);
+
+    for (let j = 0; j < possibleSums.length; j++) {
+      memo.add(possibleSums[j] + nums[i]);
+    }
+  }
+
+  return memo.has(target);
+};
+
 // DFS of combination tree, branching when index is added to sum, and when it is not, O(2^n)
 const canPartitionBacktracking = function (nums) {
   nums.sort((a, b) => b - a); // Get the largest numbers first, so if we fail, we do it fast
