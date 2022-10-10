@@ -10,6 +10,20 @@ Note: There are many solutions for this problem. See here:
  * @param {number[]} nums
  * @return {boolean}
  */
+const canPartitionBitwise = function (nums) {
+  const numsSum = nums.reduce((acc, curr) => acc + curr);
+  if ((numsSum % 2) !== 0) return false;
+
+  let row = 1n << BigInt(numsSum / 2);
+  for (let i = 0; i < nums.length; i++) {
+    const weight = nums[i];
+    row |= (row >> BigInt(weight));
+  }
+  // Check the the column corresponding to my target by bitwise ANDing it with just 1.
+  // So if the first bit is 1, it will return true, otherwise false.
+  return row & 1n;
+};
+
 // This can be a knapsack problem, where we want to find a combination that sums to sum(nums)/2.
 // We'll create a matrix to represent our possible knapsack choices.
 // We want to find a combination C[i][w] where the first i items sums to w.
