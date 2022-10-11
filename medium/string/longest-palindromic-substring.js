@@ -37,6 +37,21 @@ const longestPalindromeTwoPointers = function (s) {
   return s.slice(longestPalindromeStart, longestPalindromeStart + longestPalindromeLength);
 };
 
+// Two pointer solution in only 8 lines. O(n^3)
+const longestPalindrome = function (s) {
+  let [start, end] = [0, 0];
+
+  for (let i = 0; i < s.length; i++) {
+    for (let j = i; j <= i + 1; j++) {
+      for (let left = i, right = j; s[left] && (s[left] === s[right]); left--, right++) {
+        [start, end] = (right - left + 1) > (end - start + 1) ? [left, right] : [start, end];
+      }
+    }
+  }
+
+  return s.substring(start, end + 1);
+};
+
 // Test whether every possible substring is a palindrome, and return the longest one. O(n^3)
 const longestPalindromeBruteForce = function (s) {
   const isPalindrome = function (str) {
