@@ -8,6 +8,35 @@ of that string is the same as the original string.
  * @param {string} s
  * @return {string}
  */
+// Use two pointers to expand potential palindromes from the center. O(n^2)
+const longestPalindromeTwoPointers = function (s) {
+  if (s.length < 2) return s;
+
+  let longestPalindromeStart = 0;
+  let longestPalindromeLength = 1;
+
+  for (let i = 0; i < s.length; i++) {
+    let right = i;
+    while ((right < s.length) && (s.charAt(i) === s.charAt(right))) {
+      right++;
+    }
+
+    let left = i - 1;
+    while ((left >= 0) && (right < s.length) && (s.charAt(left) === s.charAt(right))) {
+      left--;
+      right++;
+    }
+
+    const palindromeLength = right - left - 1;
+    if (palindromeLength > longestPalindromeLength) {
+      longestPalindromeLength = palindromeLength;
+      longestPalindromeStart = left + 1;
+    }
+  }
+
+  return s.slice(longestPalindromeStart, longestPalindromeStart + longestPalindromeLength);
+};
+
 // Test whether every possible substring is a palindrome, and return the longest one. O(n^3)
 const longestPalindromeBruteForce = function (s) {
   const isPalindrome = function (str) {
