@@ -15,6 +15,22 @@ The test cases are generated so that the answer will be less than or equal to 2 
  * @param {number} n
  * @return {number}
  */
+// Cache redundant calculations using top-down memoization, O(m*n)
+const uniquePathsMemoization = function (m, n) {
+  const memo = Array.from(Array(m), () => new Array(n).fill(0));
+
+  const dfs = (row, col) => {
+    if ((row === (m - 1)) && (col === (n - 1))) return 1;
+    if ((row > (m - 1)) || (col > (n - 1))) return 0;
+    if (memo[row][col] !== 0) return memo[row][col];
+
+    memo[row][col] = dfs(row + 1, col) + dfs(row, col + 1);
+    return memo[row][col];
+  };
+
+  return dfs(0, 0);
+};
+
 // Try every possible path, O(2^(m+n))
 const uniquePathsBruteForce = function (m, n, i = 0, j = 0) {
   const dfs = (row, col) => {
