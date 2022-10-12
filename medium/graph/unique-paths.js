@@ -15,6 +15,19 @@ The test cases are generated so that the answer will be less than or equal to 2 
  * @param {number} n
  * @return {number}
  */
+// Cache redundant calculations using bottom-up tabulation, O(m*n)
+const uniquePathsTabulation = function (m, n) {
+  const tab = Array.from(Array(m), () => new Array(n).fill(1));
+
+  for (let row = 1; row < m; row++) {
+    for (let col = 1; col < n; col++) {
+      tab[row][col] = tab[row - 1][col] + tab[row][col - 1];
+    }
+  }
+
+  return tab[m - 1][n - 1];
+};
+
 // Cache redundant calculations using top-down memoization, O(m*n)
 const uniquePathsMemoization = function (m, n) {
   const memo = Array.from(Array(m), () => new Array(n).fill(0));
