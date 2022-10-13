@@ -11,6 +11,29 @@ Return the maximum amount of water a container can store.
  * @param {number[]} height
  * @return {number}
  */
+// Use two pointers, move the pointer at the lesser height until a greater height is found. O(n)
+const maxAreaTwoPointers = function (height) {
+  if (!height || height.length < 2) return 0;
+
+  let maxHeight = 0;
+  let [leftIndex, rightIndex] = [0, height.length - 1];
+
+  while (leftIndex < rightIndex) {
+    const minHeight = Math.min(height[leftIndex], height[rightIndex]);
+    maxHeight = Math.max(maxHeight, (rightIndex - leftIndex) * minHeight);
+
+    if (height[leftIndex] < height[rightIndex]) {
+      leftIndex++;
+      while (height[leftIndex] < minHeight) leftIndex++;
+    } else {
+      rightIndex--;
+      while (height[rightIndex] < minHeight) rightIndex--;
+    }
+  }
+
+  return maxHeight;
+};
+
 // Compute the area between every possible set of lines. O(n^2)
 const maxAreaBruteForce = function (height) {
   let result = 0;
