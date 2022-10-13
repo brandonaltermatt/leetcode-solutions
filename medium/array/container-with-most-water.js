@@ -11,7 +11,8 @@ Return the maximum amount of water a container can store.
  * @param {number[]} height
  * @return {number}
  */
-const maxArea = function (height) {
+// Compute the area between every possible set of lines. O(n^2)
+const maxAreaBruteForce = function (height) {
   let result = 0;
 
   for (let start = 0; start < height.length; start++) {
